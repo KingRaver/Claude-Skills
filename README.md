@@ -59,6 +59,14 @@ Drop a `.skill` into Claude Code and it learns a new domain. Permanently.
 | `project-workshop.skill` | Full lifecycle skill — raw idea through spec, docs, build plan, code review, and active improvement |
 | `doc-feature-extractor.skill` | Reverse-engineers a product's integration surface from its developer docs, then maps it to implementation patterns |
 
+### Build & Ship
+
+| Skill | What it does |
+|---|---|
+| `phase-runner.skill` | Executes **one** phase of a phased checklist doc (`SCAFFOLDING.md`, `REVIEW_SCAFFOLDING.md`, `ROADMAP.md` — whatever you point it at), verifies with the repo's real lint / typecheck / build / test commands, and only ticks items off once they actually pass |
+| `ship.skill` | The full finish-and-land cadence for completed work: verify → docs → changelog → commit → PR to main, with git guardrails and a hard stop on any red step |
+| `simple-pr.skill` | The minimal cadence — branch → commit → changelog (only if one exists) → push → PR. No verification gate, for changes that don't need one |
+
 ---
 
 ## How skills activate
@@ -79,6 +87,8 @@ Claude reads the trigger descriptions and activates the right skill when it reco
 /professional-frontend  →  builds a polished UI from your brief
 /project-advisor        →  audits a GitHub repo URL you provide
 /messaging-agent        →  scaffolds a Telegram bot for your app
+/phase-runner           →  implements one phase of your build plan
+/ship                   →  verifies, documents, and opens the PR
 ```
 
 ---
@@ -89,7 +99,7 @@ Claude reads the trigger descriptions and activates the right skill when it reco
 Each skill encodes a specific point of view on how something should be built — which libraries, which patterns, which tradeoffs. This means less decision fatigue and faster time-to-shipped.
 
 **Skills compose.**
-`project-scaffold` → `project-builder` → `project-workshop` forms a complete project lifecycle. `professional-frontend` pairs naturally with `eu-cookie-compliance`. Stack them.
+`project-scaffold` → `project-builder` → `project-workshop` forms a complete project lifecycle, and `phase-runner` → `ship` closes the loop by executing the plan those skills write and landing it. `professional-frontend` pairs naturally with `eu-cookie-compliance`. Stack them.
 
 **Skills are alive.**
 As patterns evolve, skills get updated. The `.skill` format bundles reference docs alongside the trigger logic, so Claude always has current context — not a frozen snapshot.
@@ -106,11 +116,14 @@ claude-skills/
 ├── frontend-upgrade.skill       # Existing frontend improvement
 ├── messaging-agent.skill        # Telegram / Slack / Discord agent
 ├── monorepo-migration.skill     # Turborepo consolidation
+├── phase-runner.skill           # Execute one phase of a build plan
 ├── professional-frontend.skill  # Design-system-first UI building
 ├── project-advisor.skill        # Repo audit & improvement report
 ├── project-builder.skill        # Scaffold → Review → Execute
 ├── project-scaffold.skill       # Idea → project scaffold
 ├── project-workshop.skill       # Full project lifecycle
+├── ship.skill                   # Verify → docs → changelog → PR
+├── simple-pr.skill              # Branch → commit → PR, no gate
 └── x402-pos-terminal.skill      # x402 crypto POS terminal
 ```
 
