@@ -38,7 +38,7 @@ Drop a `.skill` into Claude Code and it learns a new domain. Permanently.
 
 | Skill | What it does |
 |---|---|
-| `professional-frontend.skill` | Builds production-grade UIs using a strict design token system — spacing scale, typographic hierarchy, component consistency. Outputs HTML/CSS and React/JSX |
+| `professional-frontend.skill` | Interview-led UI design: runs a design discovery interview, derives a project-specific contrast-validated palette and token set, then builds consistent product UI. Outputs HTML/CSS and React/JSX |
 | `frontend-upgrade.skill` | Audits and improves an *existing* Next.js / React codebase across three axes: mobile responsiveness, visual design, and interactivity |
 | `eu-cookie-compliance.skill` | Implements full EU cookie consent under ePrivacy Directive and GDPR — banner logic, consent storage, per-category opt-in/out |
 
@@ -55,15 +55,17 @@ Drop a `.skill` into Claude Code and it learns a new domain. Permanently.
 |---|---|
 | `project-advisor.skill` | Deep-researches a GitHub repo and produces a prioritised improvement report — feature gaps, architecture, DX, docs |
 | `project-builder.skill` | Drives an existing project through three phases: **Scaffold → Review → Execute** |
-| `project-scaffold.skill` | Guides an idea through structured discovery and produces `SPEC.md`, `STRUCTURE.md`, and a ready-to-use project scaffold |
+| `project-scaffold.skill` | Takes an idea through brainstorm and clarifying questions to a starting doc set (spec, structure, README, changelog, `CLAUDE.md`, style guide) and a question-based folder layout — asks which files to write, where they go, and how to handle existing ones |
 | `project-workshop.skill` | Full lifecycle skill — raw idea through spec, docs, build plan, code review, and active improvement |
 | `doc-feature-extractor.skill` | Reverse-engineers a product's integration surface from its developer docs, then maps it to implementation patterns |
+| `project-archaeology.skill` | Reverse-engineers an existing codebase and its git history (original core vs. later additions) into an as-built dossier, a rebuild spec, and the project's documentation foundation |
 
 ### Build & Ship
 
 | Skill | What it does |
 |---|---|
 | `phase-runner.skill` | Executes **one** phase of a phased checklist doc (`SCAFFOLDING.md`, `REVIEW_SCAFFOLDING.md`, `ROADMAP.md` — whatever you point it at), verifies with the repo's real lint / typecheck / build / test commands, and only ticks items off once they actually pass |
+| `next-work.skill` | Starts the next piece of work from a fresh `main` — fetches, fast-forwards or flags divergence, then asks what's next and suggests branch names before branching |
 | `ship.skill` | The full finish-and-land cadence for completed work: verify → docs → changelog → commit → PR to main, with git guardrails and a hard stop on any red step |
 | `simple-pr.skill` | The minimal cadence — branch → commit → changelog (only if one exists) → push → PR. No verification gate, for changes that don't need one |
 
@@ -116,9 +118,11 @@ claude-skills/
 ├── frontend-upgrade.skill       # Existing frontend improvement
 ├── messaging-agent.skill        # Telegram / Slack / Discord agent
 ├── monorepo-migration.skill     # Turborepo consolidation
+├── next-work.skill              # Fresh main → named branch
 ├── phase-runner.skill           # Execute one phase of a build plan
 ├── professional-frontend.skill  # Design-system-first UI building
 ├── project-advisor.skill        # Repo audit & improvement report
+├── project-archaeology.skill    # Codebase + history → rebuild spec
 ├── project-builder.skill        # Scaffold → Review → Execute
 ├── project-scaffold.skill       # Idea → project scaffold
 ├── project-workshop.skill       # Full project lifecycle
