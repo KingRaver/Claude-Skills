@@ -71,7 +71,7 @@ Drop a `.skill` into Claude Code and it learns a new domain. Permanently.
 |---|---|
 | `phase-runner.skill` | Executes **one** phase of a phased checklist doc (`SCAFFOLDING.md`, `REVIEW_SCAFFOLDING.md`, `ROADMAP.md` — whatever you point it at), verifies with the repo's real lint / typecheck / build / test commands, and only ticks items off once they actually pass |
 | `next-work.skill` | Starts the next piece of work from a fresh `main` — fetches, fast-forwards or flags divergence, then asks what's next and suggests branch names before branching |
-| `ship.skill` | The full finish-and-land cadence for completed work: verify → docs → changelog → commit → PR to main, with git guardrails and a hard stop on any red step |
+| `deploy.skill` | The full finish-and-land cadence for completed work: verify → docs → changelog → commit → PR to main, with git guardrails and a hard stop on any red step |
 | `simple-pr.skill` | The minimal cadence — branch → commit → changelog (only if one exists) → push → PR. No verification gate, for changes that don't need one |
 
 ### Compliance
@@ -114,7 +114,7 @@ Claude reads the trigger descriptions and activates the right skill when it reco
 /project-advisor        →  audits a GitHub repo URL you provide
 /messaging-agent        →  scaffolds a Telegram bot for your app
 /phase-runner           →  implements one phase of your build plan
-/ship                   →  verifies, documents, and opens the PR
+/deploy                 →  verifies, documents, and opens the PR
 ```
 
 ---
@@ -125,7 +125,7 @@ Claude reads the trigger descriptions and activates the right skill when it reco
 Each skill encodes a specific point of view on how something should be built — which libraries, which patterns, which tradeoffs. This means less decision fatigue and faster time-to-shipped.
 
 **Skills compose.**
-`project-scaffold` → `project-builder` → `project-workshop` forms a complete project lifecycle, and `phase-runner` → `ship` closes the loop by executing the plan those skills write and landing it. `professional-frontend` pairs naturally with `eu-cookie-compliance`. Stack them.
+`project-scaffold` → `project-builder` → `project-workshop` forms a complete project lifecycle, and `phase-runner` → `deploy` closes the loop by executing the plan those skills write and landing it. `professional-frontend` pairs naturally with `eu-cookie-compliance`. Stack them.
 
 **Skills are alive.**
 As patterns evolve, skills get updated. The `.skill` format bundles reference docs alongside the trigger logic, so Claude always has current context — not a frozen snapshot.
@@ -140,6 +140,7 @@ claude-skills/
 ├── brand-identity.skill         # Logo, wordmark, favicon set
 ├── compliance-suite.skill       # End-to-end EU compliance run
 ├── compliance-synthesis.skill   # Cross-regime compliance report
+├── deploy.skill                 # Verify → docs → changelog → PR
 ├── doc-feature-extractor.skill  # Docs → feature map
 ├── docs-reorg.skill             # Docs restructure by purpose
 ├── dora-compliance.skill        # DORA readiness audit
@@ -162,7 +163,6 @@ claude-skills/
 ├── project-builder.skill        # Scaffold → Review → Execute
 ├── project-scaffold.skill       # Idea → project scaffold
 ├── project-workshop.skill       # Full project lifecycle
-├── ship.skill                   # Verify → docs → changelog → PR
 ├── simple-pr.skill              # Branch → commit → PR, no gate
 ├── skill-creator.skill          # Create / eval skills
 ├── soc2-compliance.skill        # SOC 2 readiness audit
